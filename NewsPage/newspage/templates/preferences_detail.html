@@ -1,0 +1,19 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+
+<h1>Preferences</h1>
+
+<p><strong>Username: </strong>{{ userpreferences.user_name.username }}</p>
+<p><strong>Display Period: </strong>{{ userpreferences.display_period }}</p>
+<p><strong>Articles Per Page: </strong>{{ userpreferences.articles_per_page }}</p>
+<p><strong>Following Sites: </strong></p>
+<ul>
+{% for site in userpreferences.following_sites.all %}
+    <li>{{ site }}</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'user-prefs-update' user.userpreferences.pk %}">Modify Preferences</a>
+
+{% endblock %}

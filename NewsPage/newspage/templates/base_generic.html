@@ -19,7 +19,7 @@
                         <br>
                         <p>User: {{user.username}}</p>
                         <li><a href="">Topics</a></li>
-                        <li><a href="">Preferences</a></li>
+                        <li><a href="{% url 'user-prefs' user.userpreferences.pk %}">Preferences</a></li>
                         <li><a href="{% url 'logout' %}">Logout</a></li>
                         {% else %}
                         <li><a href="{% url 'login' %}">Login</a></li>
