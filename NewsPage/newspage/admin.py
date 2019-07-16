@@ -4,5 +4,11 @@ from newspage.models import MainSite, FeedList, UserPreferences
 # Register your models here.
 
 admin.site.register(MainSite)
-admin.site.register(FeedList)
-admin.site.register(UserPreferences)
+
+@admin.register(FeedList)
+class FeedListAdmin(admin.ModelAdmin):
+    list_display=['__str__','url']
+
+@admin.register(UserPreferences)
+class UserPreferencesAdmin(admin.ModelAdmin):
+    list_display=['__str__','display_period','articles_per_page','display_sites']
