@@ -1,0 +1,11 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h1>{{ Name }}</h1>
+<br>
+
+{% for sites in Feed.entries %}
+<p><a href="{{sites.link}}">{{sites.title|safe}}</a></p>
+{% endfor %}
+
+{% endblock %}

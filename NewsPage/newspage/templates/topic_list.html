@@ -1,0 +1,13 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h1>Topics</h1>
+<br>
+
+<ul>
+    {% for topic in user.userpreferences.following_sites.all %}
+    <li><a href="{% url 'feed' topic.pk %}">{{ topic }}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
