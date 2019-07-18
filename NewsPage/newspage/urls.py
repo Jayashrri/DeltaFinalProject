@@ -7,4 +7,5 @@ urlpatterns = [
     path('preferences/<int:pk>/update/', views.UserPreferencesUpdate.as_view(), name='user-prefs-update'),
     path('topics/<int:pk>', views.DispTopics.as_view(), name='topics'),
     path('topics/viewfeed/<int:pk>', views.DispFeed, name='feed'),
+    path('topics/article/<int:feed>/<int:index>', views.DispArticle, name='articles'),
 ]

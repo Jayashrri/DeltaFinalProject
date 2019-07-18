@@ -5,7 +5,7 @@
 <br>
 
 {% for sites in Feed.entries %}
-<p><a href="{{sites.link}}">{{sites.title|safe}}</a></p>
+<p><a href="{% url 'articles' id forloop.counter0 %}">{{sites.title|safe}}</a></p>
 {% endfor %}
 
 {% endblock %}

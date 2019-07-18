@@ -25,4 +25,11 @@ class DispTopics(DetailView):
 def DispFeed(request, pk):
     FeedName=FeedList.objects.get(id=pk)
     Feed=rss.GetFeed(FeedName)
-    return render(request, 'feed.html', context={'Feed': Feed, 'Name': FeedName})
+    return render(request, 'feed.html', context={'Feed': Feed, 'Name': FeedName, 'id': pk})
+
+def DispArticle(request, feed, index):
+    FeedName=FeedList.objects.get(id=feed)
+    FeedSet=rss.GetFeed(FeedName)
+    link=FeedSet.entries[index]['link']
+    article=rss.GetArticle(link)
+    return render(request, 'article.html', context={'article': article, 'id': feed})
