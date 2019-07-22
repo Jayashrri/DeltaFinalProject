@@ -1,6 +1,26 @@
 {% extends 'base_generic.html' %}
 
 {% block content %}
-<h1>News Page</h1>
-<h4>Welcome!</h4>
+<div class="welcome">
+{% if user.is_authenticated %}
+    <h4><strong>Welcome, {{user}}!</strong></h4>
+{% else %}
+    <h4><strong>Welcome!</strong></h4>
+{% endif %}
+</div>
+<br>
+{% if user.is_authenticated %}
+    {% if not isupdated %}
+        <p>All feed updates have been viewed.</p>
+    {% else %}
+        <p>Updated feeds: </p>
+        <ul>
+        {% for feeditem in isupdated %}
+            {% if feeditem in user.userpreferences.following_sites.all %}
+                <li><a href="{% url 'feed' feeditem.pk %}">{{feeditem}}</a></li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endif %}
 {% endblock %}

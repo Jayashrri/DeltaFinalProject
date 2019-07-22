@@ -3,11 +3,9 @@ from newspage.models import MainSite, FeedList, UserPreferences
 from django.views.generic import DetailView
 from django.views.generic.edit import UpdateView
 from . import rss
+import datetime
 
 # Create your views here.
-
-def index(request):
-    return render(request, 'index.html')
 
 class UserPreferencesDetail(DetailView):
     model=UserPreferences
@@ -25,6 +23,8 @@ class DispTopics(DetailView):
 def DispFeed(request, pk):
     FeedName=FeedList.objects.get(id=pk)
     Feed=rss.GetFeed(FeedName)
+    FeedName.last_update=datetime.datetime.now()
+    FeedName.save()
     return render(request, 'feed.html', context={'Feed': Feed, 'Name': FeedName, 'id': pk})
 
 def DispArticle(request, feed, index):
@@ -33,3 +33,12 @@ def DispArticle(request, feed, index):
     link=FeedSet.entries[index]['link']
     article=rss.GetArticle(link)
     return render(request, 'article.html', context={'article': article, 'id': feed})
+
+def FeedUpdate(request):
+    IsUpdated=[]
+    FeedItems=FeedList.objects.all()
+    for FeedItem in FeedItems:
+        result=rss.CheckUpdate(FeedItem)
+        if (result):
+            IsUpdated.append(FeedItem)
+    return render(request, 'index.html', context={'isupdated': IsUpdated})

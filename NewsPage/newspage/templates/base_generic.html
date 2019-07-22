@@ -6,10 +6,18 @@
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         {% load static %}
-        <link rel="stylesheet" href="{% static 'styles.css' %}">
+        <link rel="stylesheet" href="{% static 'style.css' %}">
     </head>
     <body>
         <div class="container-fluid">
+            <div class="jumbotron">
+                <div class="text-center">
+                    <h1>News Now</h1>
+                    <p>
+                        News from major sites all at one place
+                    </p>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-sm-2">
                     {% block sidebar %}
@@ -18,7 +26,7 @@
                         {% if user.is_authenticated %}
                         <br>
                         <p>User: {{user.username}}</p>
-                        <li><a href="{% url 'topics' user.userpreferences.pk %}">Topics</a></li>
+                        <li><a href="{% url 'topics' user.userpreferences.pk %}">Following Topics</a></li>
                         <li><a href="{% url 'user-prefs' user.userpreferences.pk %}">Preferences</a></li>
                         <li><a href="{% url 'logout' %}">Logout</a></li>
                         {% else %}
@@ -29,8 +37,10 @@
                     {% endblock %}
                 </div>
                 <div class="col-sm-10">
-                    {% block content %}
-                    {% endblock %}
+                    <div class="content">
+                        {% block content %}
+                        {% endblock %}
+                    </div>
                 </div>
             </div>
         </div>

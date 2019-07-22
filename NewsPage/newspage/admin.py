@@ -7,7 +7,8 @@ admin.site.register(MainSite)
 
 @admin.register(FeedList)
 class FeedListAdmin(admin.ModelAdmin):
-    list_display=['__str__','url']
+    list_display=['__str__','url','last_update']
+    readonly_fields=['last_update']
 
 @admin.register(UserPreferences)
 class UserPreferencesAdmin(admin.ModelAdmin):

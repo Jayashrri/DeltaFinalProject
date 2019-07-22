@@ -17,6 +17,7 @@ class FeedList(models.Model):
     main_site=models.ForeignKey(MainSite, on_delete=models.SET_NULL, null=True, help_text='Enter the name of the Main Site')
     topic_name=models.CharField(max_length=100, help_text='Enter the topic of articles')
     url=models.CharField(max_length=1000, help_text='Enter URL of topic RSS Feed')
+    last_update=models.DateTimeField(default=None, blank=True, null=True)
 
     def __str__(self):
         return f'{self.main_site.name}: {self.topic_name}'

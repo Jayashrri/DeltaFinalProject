@@ -16,7 +16,7 @@ def register(request):
             username = userObj['username']
             password =  userObj['password']
             if not (User.objects.filter(username=username).exists()):
-                User.objects.create_user(username, password)
+                User.objects.create_user(username=username, password=password)
                 NewUser=User.objects.get(username=username)
                 NewPref=UserPreferences(user_name=NewUser, display_period=2, articles_per_page=10)
                 NewPref.save()
