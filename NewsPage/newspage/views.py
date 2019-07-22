@@ -14,7 +14,7 @@ class UserPreferencesDetail(DetailView):
 class UserPreferencesUpdate(UpdateView):
     model=UserPreferences
     template_name='preferences_form.html'
-    fields=['display_period','articles_per_page','following_sites']
+    fields=['following_sites']
 
 class DispTopics(DetailView):
     model=UserPreferences
@@ -31,7 +31,7 @@ def DispArticle(request, feed, index):
     FeedName=FeedList.objects.get(id=feed)
     FeedSet=rss.GetFeed(FeedName)
     link=FeedSet.entries[index]['link']
-    article=rss.GetArticle(link)
+    article=rss.GetArticle(link,request)
     return render(request, 'article.html', context={'article': article, 'id': feed})
 
 def FeedUpdate(request):

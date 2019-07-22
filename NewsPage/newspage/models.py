@@ -29,8 +29,6 @@ class FeedList(models.Model):
 
 class UserPreferences(models.Model):
     user_name=models.OneToOneField(User, on_delete=models.CASCADE)
-    display_period=models.IntegerField(help_text='Enter number of days from which to show articles')
-    articles_per_page=models.IntegerField(help_text='Enter number of articles displayed per page')
     following_sites=models.ManyToManyField(FeedList, help_text='Select sites to follow')
 
     def get_absolute_url(self):

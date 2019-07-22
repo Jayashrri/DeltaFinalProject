@@ -6,6 +6,10 @@
     font-size: 17px;
 }
 
+h4 {
+    text-align: center;
+}
+
 .sidebar-nav a {
     color: #FEFFFF;
     text-decoration: underline;
@@ -37,14 +41,34 @@ html body {
     background-color: #DEF2F1;
     border-radius: 10px;
     padding: 20px;
-    font-size: 20px;
+    font-size: 19px;
 }
 
-.col-sm-10 h1 {
+.col-sm-10 h4 {
     text-align: center;
     font-weight: bold;
 }
 
 .welcome {
     text-align: center;
+}
+
+#topimage {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    max-width: 460px;
+    max-height: 190px;
+    width: auto;
+    height: auto;
+    margin-bottom: 50px;
+}
+
+#articletext {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgb(148, 219, 216);
+    margin: 20px;
+    text-align: justify;
+    text-indent: 70px;
 }

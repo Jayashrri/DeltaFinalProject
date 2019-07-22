@@ -12,4 +12,4 @@ class FeedListAdmin(admin.ModelAdmin):
 
 @admin.register(UserPreferences)
 class UserPreferencesAdmin(admin.ModelAdmin):
-    list_display=['__str__','display_period','articles_per_page','display_sites']
+    list_display=['__str__','display_sites']
