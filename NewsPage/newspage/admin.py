@@ -1,9 +1,7 @@
 from django.contrib import admin
-from newspage.models import MainSite, FeedList, UserPreferences
+from newspage.models import FeedList, UserPreferences
 
 # Register your models here.
-
-admin.site.register(MainSite)
 
 @admin.register(FeedList)
 class FeedListAdmin(admin.ModelAdmin):

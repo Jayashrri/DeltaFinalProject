@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from newspage.models import MainSite, FeedList, UserPreferences
+from django.shortcuts import render, redirect
+from newspage.models import FeedList, UserPreferences, FeedListForm
 from django.views.generic import DetailView
 from django.views.generic.edit import UpdateView
 from . import rss
@@ -42,3 +42,14 @@ def FeedUpdate(request):
         if (result):
             IsUpdated.append(FeedItem)
     return render(request, 'index.html', context={'isupdated': IsUpdated})
+
+def AddFeed(request):
+    if request.method == "POST":
+        form = FeedListForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('user-prefs', pk=request.user.pk)
+    else:
+        form=FeedListForm()
+        return render(request, 'preferences_form.html', context={'form': form})
+        

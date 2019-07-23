@@ -12,6 +12,7 @@
 {% endfor %}
 </ul>
 
+<a href="{% url 'addfeed' %}">Add Custom Feed</a><br>
 <a href="{% url 'user-prefs-update' user.userpreferences.pk %}">Modify Preferences</a>
 
 {% endblock %}
