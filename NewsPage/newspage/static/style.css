@@ -72,3 +72,8 @@ html body {
     text-align: justify;
     text-indent: 70px;
 }
+
+#addart {
+    font-size: 19px;
+    padding-left: 0px
+}

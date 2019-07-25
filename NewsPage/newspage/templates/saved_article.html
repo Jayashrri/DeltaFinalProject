@@ -1,0 +1,34 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<br>
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="arturl" value="{{url}}">
+    <button type="submit" class="btn btn-link" id="addart" name="addart" value="delart">Delete Article</button>
+</form>
+<p><a href="{% url 'savedlist' %}">Back to List</a></p>
+
+<br>
+<h4><strong>{{article.title}}</strong></h4>
+<br>
+
+<div class="row" id="topimage">
+    <img src="{{article.top_image}}" class="img-fluid, rounded">
+</div>
+<br>
+<br>
+<div class="row" id="articletext">
+    {{article.text}}
+</div>
+<br>
+<br>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="arturl" value="{{url}}">
+    <button type="submit" class="btn btn-link" id="addart" name="addart" value="delart">Delete Article</button>
+</form>
+<p><a href="{% url 'savedlist' %}">Back to List</a></p>
+
+{% endblock %}

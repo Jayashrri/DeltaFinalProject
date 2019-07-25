@@ -2,7 +2,16 @@
 
 {% block content %}
 <br>
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="arturl" value="{{url}}">
+    <input type="hidden" name="arttitle" value="{{article.title}}">
+    <input type="hidden" name="feedid" value="{{id}}">
+    <button type="submit" class="btn btn-link" id="addart" name="addart" value="addart">Save Article</button>
+</form>
 <p><a href="{% url 'feed' id %}">Back to Feed</a></p>
+
+<br>
 <h4><strong>{{article.title}}</strong></h4>
 <br>
 
@@ -17,6 +26,13 @@
 <br>
 <br>
 
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="arturl" value="{{url}}">
+    <input type="hidden" name="arttitle" value="{{article.title}}">
+    <input type="hidden" name="feedid" value="{{id}}">
+    <button type="submit" class="btn btn-link" id="addart" name="addart" value="addart">Save Article</button>
+</form>
 <p><a href="{% url 'feed' id %}">Back to Feed</a></p>
 
 {% endblock %}

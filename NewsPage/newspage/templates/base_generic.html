@@ -14,7 +14,7 @@
                 <div class="text-center">
                     <h1>News Now</h1>
                     <p>
-                        News from major sites all at one place
+                        News from many sites all at one place
                     </p>
                 </div>
             </div>
@@ -28,6 +28,7 @@
                         <br>
                         <p>User: {{user.username}}</p>
                         <li><a href="{% url 'topics' user.userpreferences.pk %}">Following Topics</a></li>
+                        <li><a href="{% url 'savedlist' %}">Saved Articles</a></li>
                         <li><a href="{% url 'user-prefs' user.userpreferences.pk %}">Preferences</a></li>
                         <li><a href="{% url 'logout' %}">Logout</a></li>
                         {% else %}

@@ -9,4 +9,6 @@ urlpatterns = [
     path('topics/<int:pk>', views.DispTopics.as_view(), name='topics'),
     path('topics/viewfeed/<int:pk>', views.DispFeed, name='feed'),
     path('topics/article/<int:feed>/<int:index>', views.DispArticle, name='articles'),
+    path('saved/', views.ShowSaved, name='savedlist'),
+    path('saved/<int:pk>', views.DispSavedArt, name='savedarticle'),
 ]

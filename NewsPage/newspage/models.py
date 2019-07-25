@@ -38,6 +38,14 @@ class UserPreferences(models.Model):
         verbose_name='User Preference'
         verbose_name_plural='User Preferences'
 
+class SavedArticles(models.Model):
+    saved_user=models.ForeignKey(User, on_delete=models.CASCADE)
+    article_url=models.TextField()
+    article_title=models.TextField()
+
+    class Meta:
+        verbose_name='Saved Article'
+
 class FeedListForm(forms.ModelForm):
     class Meta:
         model=FeedList

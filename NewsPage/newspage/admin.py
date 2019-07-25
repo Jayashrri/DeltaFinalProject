@@ -1,5 +1,5 @@
 from django.contrib import admin
-from newspage.models import FeedList, UserPreferences
+from newspage.models import FeedList, UserPreferences, SavedArticles
 
 # Register your models here.
 
@@ -11,3 +11,7 @@ class FeedListAdmin(admin.ModelAdmin):
 @admin.register(UserPreferences)
 class UserPreferencesAdmin(admin.ModelAdmin):
     list_display=['__str__','display_sites']
+
+@admin.register(SavedArticles)
+class SavedArticlesAdmin(admin.ModelAdmin):
+    list_display=['saved_user','article_title','article_url']

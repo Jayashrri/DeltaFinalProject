@@ -1,0 +1,11 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h4>Saved Articles</h4>
+<br>
+
+{% for article in artset %}
+<p><a href="{% url 'savedarticle' article.pk %}">{{article.article_title}}</a></p>
+{% endfor %}
+
+{% endblock %}
