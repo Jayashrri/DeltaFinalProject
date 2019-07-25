@@ -9,7 +9,6 @@ class FeedList(models.Model):
     main_site=models.CharField(max_length=100, help_text='Enter the name of the Main Site')
     topic_name=models.CharField(max_length=100, help_text='Enter the topic of articles')
     url=models.CharField(max_length=1000, help_text='Enter URL of topic RSS Feed')
-    last_update=models.DateTimeField(default=None, blank=True, null=True)
 
     def __str__(self):
         return f'{self.main_site}: {self.topic_name}'
@@ -21,7 +20,7 @@ class FeedList(models.Model):
 
 class UserPreferences(models.Model):
     user_name=models.OneToOneField(User, on_delete=models.CASCADE)
-    following_sites=models.ManyToManyField(FeedList, help_text='Select sites to follow')
+    following_sites=models.ManyToManyField(FeedList, help_text='Select sites to follow', blank=True)
 
     def get_absolute_url(self):
         return reverse('user-prefs', args=[str(self.id)])

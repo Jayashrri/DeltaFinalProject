@@ -10,14 +10,5 @@
 {% endif %}
 </div>
 <br>
-{% if user.is_authenticated %}
-        <p>Updated feeds: </p>
-    <ul>
-    {% for feeditem in isupdated %}
-        {% if feeditem in user.userpreferences.following_sites.all %}
-            <li><a href="{% url 'feed' feeditem.pk %}">{{feeditem}}</a></li>
-        {% endif %}
-    {% endfor %}
-    </ul>
-{% endif %}
+
 {% endblock %}

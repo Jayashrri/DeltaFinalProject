@@ -5,8 +5,7 @@ from newspage.models import FeedList, UserPreferences, SavedArticles
 
 @admin.register(FeedList)
 class FeedListAdmin(admin.ModelAdmin):
-    list_display=['__str__','url','last_update']
-    readonly_fields=['last_update']
+    list_display=['__str__','url']
 
 @admin.register(UserPreferences)
 class UserPreferencesAdmin(admin.ModelAdmin):

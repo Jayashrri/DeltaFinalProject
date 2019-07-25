@@ -20,6 +20,9 @@ class DispTopics(DetailView):
     model=UserPreferences
     template_name='topic_list.html'
 
+def index(request):
+    return render(request, 'index.html')
+
 def DispFeed(request, pk):
     FeedName=FeedList.objects.get(id=pk)
     Feed=rss.GetFeed(FeedName)
@@ -42,15 +45,6 @@ def DispArticle(request, feed, index):
         link=FeedSet.entries[index]['link']
         article=rss.GetArticle(link,request)
         return render(request, 'article.html', context={'article': article, 'id': feed, 'url': link})
-
-def FeedUpdate(request):
-    IsUpdated=[]
-    FeedItems=FeedList.objects.all()
-    for FeedItem in FeedItems:
-        result=rss.CheckUpdate(FeedItem)
-        if (result):
-            IsUpdated.append(FeedItem)
-    return render(request, 'index.html', context={'isupdated': IsUpdated})
 
 def AddFeed(request):
     if request.method == "POST":
