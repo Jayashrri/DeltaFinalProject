@@ -16,7 +16,7 @@ def register(request):
             NewUser=User.objects.get(username=username)
             NewPref=UserPreferences(user_name=NewUser)
             NewPref.save()
-            return HttpResponseRedirect('/accounts/login')                    
+            return HttpResponseRedirect('/accounts/login')                  
     else:
         form = UserCreationForm()
         

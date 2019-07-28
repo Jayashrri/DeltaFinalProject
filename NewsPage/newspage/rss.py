@@ -13,5 +13,4 @@ def GetArticle(FeedLink,request):
     newarticle=Article(FeedLink,config=config)
     newarticle.download()
     newarticle.parse()
-    newarticle.nlp()
     return newarticle
