@@ -16,7 +16,7 @@ h4 {
 }
 
 .col-sm-2 {
-    background-color: #2B7A78;
+    background-color: rgb(231, 132, 75);
     border-radius: 10px;
 }
 
@@ -24,7 +24,7 @@ h4 {
     margin-bottom: 10px;
     margin-top: 10px;
     padding: 20px;
-    background-color: #3AAFA9;
+    background-color: rgb(179, 11, 20);
     color: #FEFFFF;
 }
 
@@ -33,12 +33,14 @@ h4 {
 }
 
 html body {
-    background-color: rgb(173, 210, 221);
+    background-image: url("basebg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
     font-family: Georgia, 'Times New Roman', Times, serif; 
 }
 
 .col-sm-10 {
-    background-color: #DEF2F1;
+    background-color: rgb(214, 211, 207);
     border-radius: 10px;
     padding: 20px;
     font-size: 19px;
@@ -67,7 +69,7 @@ html body {
 #articletext {
     padding: 20px;
     border-radius: 10px;
-    background-color: rgb(148, 219, 216);
+    background-color: rgb(240, 237, 235);
     margin: 20px;
     text-align: justify;
     text-indent: 70px;
