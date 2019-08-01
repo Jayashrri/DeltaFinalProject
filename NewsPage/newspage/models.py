@@ -17,7 +17,6 @@ class FeedList(models.Model):
     class Meta:
         verbose_name='Feed List'
     
-
 class UserPreferences(models.Model):
     user_name=models.OneToOneField(User, on_delete=models.CASCADE)
     following_sites=models.ManyToManyField(FeedList, help_text='Select sites to follow', blank=True)
@@ -37,6 +36,19 @@ class UserPreferences(models.Model):
         verbose_name='User Preference'
         verbose_name_plural='User Preferences'
 
+class ViewStatus(models.Model):
+    user_name=models.ForeignKey(User, on_delete=models.CASCADE)
+    site_name=models.ForeignKey(FeedList, on_delete=models.CASCADE)
+    last_viewed=models.DateTimeField()
+
+    def site_display(self):
+        return self.site_name.topic_name
+    site_display.short_description='Site Name'
+    
+    class Meta:
+        verbose_name='View Status'
+        verbose_name_plural='View Status'
+
 class SavedArticles(models.Model):
     saved_user=models.ForeignKey(User, on_delete=models.CASCADE)
     article_url=models.TextField()
@@ -49,3 +61,15 @@ class FeedListForm(forms.ModelForm):
     class Meta:
         model=FeedList
         fields=['main_site','topic_name','url']
+
+def checkremove(sender, **kwargs):
+    action=kwargs['action']
+    RmUser=kwargs['instance'].user_name
+    if action == "post_remove":
+        for FeedInst in kwargs['pk_set']:
+            FeedName=FeedList.objects.get(id=FeedInst)
+            DelRec=ViewStatus.objects.get(site_name=FeedName, user_name=RmUser)
+            DelRec.delete()
+    pass
+
+models.signals.m2m_changed.connect(checkremove, UserPreferences.following_sites.through)

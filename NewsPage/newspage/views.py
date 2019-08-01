@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from newspage.models import FeedList, UserPreferences, FeedListForm, SavedArticles
+from newspage.models import FeedList, UserPreferences, FeedListForm, SavedArticles, ViewStatus
 from django.views.generic import DetailView
 from django.views.generic.edit import UpdateView
 from . import rss
@@ -25,9 +25,14 @@ def index(request):
 
 def DispFeed(request, pk):
     FeedName=FeedList.objects.get(id=pk)
+    currentuser=request.user
     Feed=rss.GetFeed(FeedName)
-    FeedName.last_update=datetime.datetime.now()
-    FeedName.save()
+    if ViewStatus.objects.filter(user_name=currentuser, site_name=FeedName).exists():
+        CurViewStatus=ViewStatus.objects.get(user_name=currentuser, site_name=FeedName)
+        CurViewStatus.last_viewed=datetime.datetime.now()
+    else:
+        CurViewStatus=ViewStatus.objects.create(user_name=currentuser, site_name=FeedName, last_viewed=datetime.datetime.now())
+    CurViewStatus.save()
     return render(request, 'feed.html', context={'Feed': Feed, 'Name': FeedName, 'id': pk})
 
 def DispArticle(request, feed, index):
@@ -54,7 +59,7 @@ def AddFeed(request):
             return redirect('user-prefs', pk=request.user.pk)
     else:
         form=FeedListForm()
-        return render(request, 'preferences_form.html', context={'form': form})
+        return render(request, 'preferences_form.html', context={'form': form}) 
 
 def ShowSaved(request):
     currentuser=request.user
