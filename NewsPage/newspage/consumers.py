@@ -14,7 +14,6 @@ class NewsConsumer(AsyncConsumer):
         currentuser = self.scope["user"]
         while currentuser:
             UpdateList = await self.returnupdate(currentuser)
-            print(UpdateList)
             if UpdateList:
                 await self.send({
                     "type": "websocket.send",
