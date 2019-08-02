@@ -25,7 +25,7 @@ SECRET_KEY = 'm_zn-skbw=f3wn40xqa(m*qo6b0et$hd03p7a7^_%3bt9w+!89'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'newspage',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'NewsPage.urls'
+ASGI_APPLICATION = "NewsPage.routing.application"
 
 TEMPLATES = [
     {

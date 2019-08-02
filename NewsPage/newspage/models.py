@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django import forms
 
+from . import rss
+
 # Create your models here.
 
 class FeedList(models.Model):
@@ -39,7 +41,7 @@ class UserPreferences(models.Model):
 class ViewStatus(models.Model):
     user_name=models.ForeignKey(User, on_delete=models.CASCADE)
     site_name=models.ForeignKey(FeedList, on_delete=models.CASCADE)
-    last_viewed=models.DateTimeField()
+    last_viewed=models.DateTimeField(blank=True, null=True)
 
     def site_display(self):
         return self.site_name.topic_name
@@ -62,6 +64,19 @@ class FeedListForm(forms.ModelForm):
         model=FeedList
         fields=['main_site','topic_name','url']
 
+def CheckUpdate(username):
+    IsUpdated=[]
+    CurrentUser=User.objects.get(username=username)
+    FeedItems=ViewStatus.objects.filter(user_name=CurrentUser)
+    for FeedItem in FeedItems:
+        result=rss.GetUpdate(FeedItem)
+        if (result):
+            FieldName=FeedItem.site_name.main_site + ": " + FeedItem.site_name.topic_name
+            IsUpdated.append(str(FieldName))
+    separator=','
+    RetUpdated=separator.join(IsUpdated)
+    return RetUpdated
+
 def checkremove(sender, **kwargs):
     action=kwargs['action']
     RmUser=kwargs['instance'].user_name
@@ -70,6 +85,11 @@ def checkremove(sender, **kwargs):
             FeedName=FeedList.objects.get(id=FeedInst)
             DelRec=ViewStatus.objects.get(site_name=FeedName, user_name=RmUser)
             DelRec.delete()
+    elif action == "post_add":
+        for FeedInst in kwargs['pk_set']:
+            FeedName=FeedList.objects.get(id=FeedInst)
+            AddRec=ViewStatus.objects.create(site_name=FeedName, user_name=RmUser)
+            AddRec.save()
     pass
 
 models.signals.m2m_changed.connect(checkremove, UserPreferences.following_sites.through)
