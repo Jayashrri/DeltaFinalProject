@@ -79,3 +79,17 @@ html body {
     font-size: 19px;
     padding-left: 0px
 }
+
+#notifications li {
+    list-style: disc;
+    list-style-position: inside;
+}
+
+#notifications {
+    border-radius: 5px;
+    background-color: #FEFFFF;
+    color: black;
+    font-size: 16px;
+    margin-bottom: 10px;
+    padding: 5px;
+}
