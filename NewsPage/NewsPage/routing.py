@@ -5,13 +5,9 @@ from channels.security.websocket import AllowedHostsOriginValidator
 
 from newspage.consumers import NewsConsumer
 application = ProtocolTypeRouter({
-    'websocket': AllowedHostsOriginValidator(
-        AuthMiddlewareStack(
-            URLRouter(
-                [
-                    path('newspage/', NewsConsumer),
-                ]
-            )
-        )
+    'websocket': AuthMiddlewareStack(
+        URLRouter([
+            path('newspage/', NewsConsumer),
+        ])
     )
 })
