@@ -84,8 +84,8 @@ DATABASES = {
         'NAME': 'newspage',
         'USER': os.environ['DB_USER'],
         'PASSWORD': os.environ['DB_PASSWORD'],
-        'HOST': 'localhost',
-        'PORT': '',
+        'HOST': 'db',
+        'PORT': '3306',
     }
 }
 
@@ -130,3 +130,4 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+FORCE_SCRIPT_NAME = '/jayashrri'
