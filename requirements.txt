@@ -41,5 +41,5 @@ tinysegmenter==0.3
 tldextract==2.2.2
 Twisted==20.3.0
 txaio==20.4.1
-urllib3==1.25.8
+urllib3==1.26.5
 zope.interface==5.0.2
